@@ -37,7 +37,7 @@ function getComputerChoice() {
      //PSEUDOCODE
      // 1. Create two variables named humanScore and computerScore
      // 2. Give it a starting value of 0
-    let humanScore = 0;
+    /* let humanScore = 0;
     let computerScore = 0;
 
     //Pseudocode
@@ -66,19 +66,59 @@ function getComputerChoice() {
         }
          console.log(`Score — Human: ${humanScore}, Computer: ${computerScore}`);
         }
+         */ //I moved the playRound to playGame
+
+
         //Pseudocode 
-        // 1. Create function named playRound
-        //2. 
+        // 1. Create function named playGame
+        //2. Move playRound to playGame
+        // 3. Make it have 5 rounds by playRound
         function playGame() {
+          let humanScore = 0;
+          let computerScore = 0;
 
+          function playRound(humanChoice, computerChoice) {
+            humanChoice = humanChoice.toLowerCase();
+
+            if (humanChoice === computerChoice) {
+                console.log("It's a tie!");
+            } else if (
+                (humanChoice === "rock" && computerChoice === "scissors") ||
+                (humanChoice === "scissors" && computerChoice === "paper") ||
+                (humanChoice === "paper" && computerChoice === "rock")
+            ) {
+                humanScore++;
+                console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            } else {
+                computerChoice++;
+                console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+            }
+            console.log(`Score: Human ${humanScore}, Computer: ${computerScore}`);
+             }
+            for (let i = 0; i < 5; i++) {
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                playRound(humanSelection, computerSelection);
+              }
+              console.log("Game Over!");
+              if (humanScore > computerScore) {
+                console.log("You won the game!");
+              } else if (humanScore < computerScore) {
+                console.log("Computer won the game!");
+              } else {
+                console.log ("It's a tie!");
+              }
         }
+        playGame();
 
-    //Pseudocode
+    /* //Pseudocode
     // 1. Get the human's choice by calling getHumanChoice()
     //2. Get the computer's choice by calling getComputerChoice()
     //3. Play one round of the game with both choices by calling playRound()
        const humanSelection = getHumanChoice();
        const computerSelection = getComputerChoice();
-       playRound(humanSelection, computerSelection);
+       playRound(humanSelection, computerSelection); 
+       -i moved them inside the playRound function because the were only
+       assigning for one round gameplay*/
     
    
