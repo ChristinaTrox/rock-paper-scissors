@@ -4,6 +4,8 @@
 // 3. Use Math.random
 // 4. Use console.log to test that functions works
 
+const { createElement } = require("react");
+
 
 
 function getComputerChoice() {
@@ -36,7 +38,7 @@ function getComputerChoice() {
         // 1. Create function named playGame
         //2. Move playRound to playGame
         // 3. Make it have 5 rounds by playRound
-        function playGame() {
+       /* function playGame() { */
           let humanScore = 0;
           let computerScore = 0;
 
@@ -58,7 +60,8 @@ function getComputerChoice() {
             }
             console.log(`Score: Human ${humanScore}, Computer: ${computerScore}`);
              }
-            for (let i = 0; i < 5; i++) {
+
+           /* for (let i = 0; i < 5; i++) {
                 const humanSelection = getHumanChoice();
                 const computerSelection = getComputerChoice();
                 playRound(humanSelection, computerSelection);
@@ -70,9 +73,23 @@ function getComputerChoice() {
                 console.log("Computer won the game!");
               } else {
                 console.log ("It's a tie!");
-              }
-        }
-        playGame();
+              } 
+            }
+        playGame(); */
 
-    
-   
+        const container = document.createElement("div");
+        container.id = "button-container";
+        document.body.appendChild(container);
+
+        const choices = ["rock", "paper", "scissors"];
+        choices.forEach(choice => {
+          const btn = document.createElement("button");
+          btn.textContent = choice.charAt(0).toUpperCase()+ choice.slice(1);
+          btn.id = choice;
+          btn.addEventListener("click", () => playRound(choice, getComputerChoice()));
+          container.appendChild(btn);
+        });
+
+        const resultsDiv = document.createElement("div");
+        resultsDiv.id = "results";
+        document.body.appendChild(resultDiv);
