@@ -4,7 +4,6 @@
 // 3. Use Math.random
 // 4. Use console.log to test that functions works
 
-const { createElement } = require("react");
 
 
 
@@ -41,24 +40,39 @@ function getComputerChoice() {
        /* function playGame() { */
           let humanScore = 0;
           let computerScore = 0;
-
+          
+          const resultsDiv = document.createElement("div");
+          resultsDiv.id = "results";
+          document.body.appendChild(resultsDiv);
+       
+   
           function playRound(humanChoice, computerChoice) {
             humanChoice = humanChoice.toLowerCase();
 
             if (humanChoice === computerChoice) {
-                console.log("It's a tie!");
+                resultsDiv.textContent ="It's a tie!";
             } else if (
                 (humanChoice === "rock" && computerChoice === "scissors") ||
                 (humanChoice === "scissors" && computerChoice === "paper") ||
                 (humanChoice === "paper" && computerChoice === "rock")
             ) {
                 humanScore++;
-                console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                resultsDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
             } else {
                 computerScore++;
-                console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+                resultsDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice} 
+                 Score: Human ${humanScore}, Computer: ${computerChoice}`;
             }
-            console.log(`Score: Human ${humanScore}, Computer: ${computerScore}`);
+
+            resultsDiv.textContent += ` | Score: Human ${humanScore}, Computer ${computerScore}`;
+
+            if (humanScore === 5) {
+              resultsDiv.textContent += " |  🎉You won the game!"
+              disableButtons();
+            } else if (computerScore === 5) {
+              resultsDiv.textContent += " | 💻Computer won the game!";
+              disableButtons();
+            }
              }
 
            /* for (let i = 0; i < 5; i++) {
@@ -89,7 +103,10 @@ function getComputerChoice() {
           btn.addEventListener("click", () => playRound(choice, getComputerChoice()));
           container.appendChild(btn);
         });
-
-        const resultsDiv = document.createElement("div");
-        resultsDiv.id = "results";
-        document.body.appendChild(resultDiv);
+           
+        function disableButtons() {
+          choices.forEach( choice => {
+            document.getElementById(choice).disabled = true;
+          });
+        }
+        
